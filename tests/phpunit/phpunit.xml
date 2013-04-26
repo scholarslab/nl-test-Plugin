@@ -1,0 +1,9 @@
+<phpunit bootstrap="bootstrap.php"
+         convertErrorsToExceptions="true"
+         convertWarningsToExceptions="true"
+         verbose="true">
+    <testsuite name="Neatline Expansion Tests">
+        <directory>integration</directory>
+        <directory>unit</directory>
+    </testsuite>
+</phpunit>
