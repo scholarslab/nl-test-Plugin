@@ -4,13 +4,13 @@
 
 /**
  * @package     omeka
- * @subpackage  neatline-Expansions
+ * @subpackage  neatline-Plugin
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
 
-class NeatlineExpansions_TestCase extends Neatline_AbstractCase
+class NeatlinePlugin_TestCase extends Neatline_AbstractCase
 {
 
 
@@ -26,11 +26,22 @@ class NeatlineExpansions_TestCase extends Neatline_AbstractCase
         $this->user = $this->db->getTable('User')->find(1);
         $this->_authenticateUser($this->user);
 
-        // Install Neatline and NeatlineExpansions.
+        // Install Neatline and NeatlinePlugin.
         $pluginHelper = new Omeka_Test_Helper_Plugin;
         $pluginHelper->setUp('Neatline');
-        $pluginHelper->setUp('NeatlineExpansions');
+        $pluginHelper->setUp('NeatlinePlugin');
 
+    }
+
+
+    /**
+     * Get the Jasmine fixtures directory.
+     *
+     * @return string The directory.
+     */
+    protected function getFixturesPath()
+    {
+        return NL_PLUGINS_DIR . '/tests/jasmine/fixtures/';
     }
 
 

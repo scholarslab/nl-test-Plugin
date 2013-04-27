@@ -2,7 +2,7 @@
          convertErrorsToExceptions="true"
          convertWarningsToExceptions="true"
          verbose="true">
-    <testsuite name="Neatline Expansion Tests">
+    <testsuite name="Neatline Plugin Tests">
         <directory>integration</directory>
         <directory>unit</directory>
     </testsuite>

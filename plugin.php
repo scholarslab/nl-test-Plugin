@@ -4,17 +4,17 @@
 
 /**
  * @package     omeka
- * @subpackage  neatline-Expansions
+ * @subpackage  neatline-Plugin
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
 
-if (!defined('NL_EXPANSIONS_DIR')) {
-    define('NL_EXPANSIONS_DIR', dirname(__FILE__));
+if (!defined('NL_PLUGIN_DIR')) {
+    define('NL_PLUGIN_DIR', dirname(__FILE__));
 }
 
-require_once NL_EXPANSIONS_DIR . '/NeatlineExpansionsPlugin.php';
+require_once NL_PLUGIN_DIR . '/NeatlinePluginPlugin.php';
 
-$expansions = new NeatlineExpansionsPlugin();
+$expansions = new NeatlinePluginPlugin();
 $expansions->setUp();

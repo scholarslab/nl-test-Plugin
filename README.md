@@ -1,3 +1,3 @@
-# NeatlineExpansions
+# NeatlinePlugin
 
-A testing harness for Neatline's record expansion system.
+A test harness for Neatline's sub-plugin system.
