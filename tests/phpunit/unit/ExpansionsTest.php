@@ -85,9 +85,10 @@ class RecordExpansionTest extends NeatlinePlugin_TestCase
     public function testJoinMissingExpansion()
     {
 
-        $record = $this->__record();
-        $record = $this->reload($record);
+        $record = new NeatlineRecord();
+        $record->__save();
 
+        $record = $this->reload($record);
         $fields = $record->toArray();
 
         // Should left-join expansion fields.
@@ -220,6 +221,35 @@ class RecordExpansionTest extends NeatlinePlugin_TestCase
         $this->assertEquals($record->field4, 1);
         $this->assertEquals($record->field5, 2);
         $this->assertEquals($record->field6, 3);
+
+    }
+
+
+    /**
+     * When a record is deleted, all of its expansions should be deleted.
+     */
+    public function testDeleteExpansion()
+    {
+
+        $record1 = new NeatlineRecord();
+        $record2 = new NeatlineRecord();
+
+        $record1->save();
+        $record2->save();
+
+        $c1 = $this->__recordExpansions->count();
+        $record1->delete();
+        $c2 = $this->__recordExpansions->count();
+
+        $expansion1 = $this->__recordExpansions->findByParent($record1);
+        $expansion2 = $this->__recordExpansions->findByParent($record2);
+
+        // Should delete record 1 row.
+        $this->assertNull($expansion1);
+        $this->assertEquals($c2, $c1-1);
+
+        // Should not delete record 2 row.
+        $this->assertNotNull($expansion2);
 
     }
 
