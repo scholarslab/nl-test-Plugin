@@ -43,6 +43,7 @@ class NeatlinePluginPlugin extends Omeka_Plugin_AbstractPlugin
             `field3`        INT(10) UNSIGNED NULL,
 
              PRIMARY KEY    (`id`),
+             UNIQUE KEY     (`parent_id`),
              INDEX          (`parent_id`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
@@ -60,6 +61,7 @@ class NeatlinePluginPlugin extends Omeka_Plugin_AbstractPlugin
             `field6`        INT(10) UNSIGNED NULL,
 
              PRIMARY KEY    (`id`),
+             UNIQUE KEY     (`parent_id`),
              INDEX          (`parent_id`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";

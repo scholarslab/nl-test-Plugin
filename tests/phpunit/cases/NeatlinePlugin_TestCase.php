@@ -31,6 +31,16 @@ class NeatlinePlugin_TestCase extends Neatline_AbstractCase
         $pluginHelper->setUp('Neatline');
         $pluginHelper->setUp('NeatlinePlugin');
 
+        // Alias expandables.
+        $this->__exhibits = $this->db->getTable('NeatlineExhibit');
+        $this->__records  = $this->db->getTable('NeatlineRecord');
+
+        // Alias expansions.
+        $this->__exhibitExpansions = $this->db->getTable(
+            'NeatlineExhibitExpansion');
+        $this->__recordExpansions = $this->db->getTable(
+            'NeatlineRecordExpansion');
+
     }
 
 
