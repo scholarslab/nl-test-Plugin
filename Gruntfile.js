@@ -10,12 +10,11 @@
 
 module.exports = function(grunt) {
 
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-symbolic-link');
   grunt.loadNpmTasks('grunt-shell');
 
-  var nlCfg = grunt.file.readJSON('../Neatline/config.json');
+  var nlPaths = grunt.file.readJSON('../Neatline/paths.json');
 
   grunt.initConfig({
 
@@ -41,49 +40,17 @@ module.exports = function(grunt) {
           overwrite: true
         }
       }
-    },
-
-    connect: {
-      server: {
-        options: {
-          keepalive: true,
-          port: 1337
-        }
-      }
-    },
-
-    jasmine: {
-
-      options: {
-        helpers: [
-          './Neatline/'+nlCfg.vendor.js.jasmine_jquery,
-          './Neatline/'+nlCfg.vendor.js.jasmine_async,
-          './Neatline/'+nlCfg.vendor.js.sinon,
-          './Neatline/'+nlCfg.jasmine+'/helpers/*.js'
-        ]
-      },
-
-      editor: {
-        src: './Neatline/'+nlCfg.payloads.shared.js+'/neatline-editor.js',
-        options: {
-          specs: './tests/jasmine/suites/editor/**/*.spec.js'
-        }
-      }
-
     }
 
   });
+
+  // Build the application.
+  grunt.registerTask('build', 'symlink');
 
   // Run tests.
   grunt.registerTask('default', 'phpunit');
 
   // Run PHPUnit.
   grunt.registerTask('phpunit', 'shell:phpunit');
-
-  // Mount editor Jasmine suite.
-  grunt.registerTask('jasmine:editor:server', [
-    'jasmine:editor:build',
-    'connect'
-  ]);
 
 };
