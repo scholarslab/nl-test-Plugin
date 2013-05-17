@@ -126,11 +126,11 @@ class RecordExpansionTest extends NeatlinePlugin_TestCase
 
 
     /**
-     * When a record is loaded, the `id` column on the expansion table
+     * When a parent is loaded, the `id` column on the expansion table
      * should be omitted from the list of columns to be joined onto the
      * record. Otherwise, the expansion id will clobber the record id.
      */
-    public function testPreserveRecordIdOnQuery()
+    public function testPreserveParentIdOnQuery()
     {
 
         $recordA = new NeatlineRecord();
@@ -207,7 +207,7 @@ class RecordExpansionTest extends NeatlinePlugin_TestCase
         $record->field5 = 2;
         $record->field6 = 3;
 
-        // Save the record normally, causing an expansion to be created. 
+        // Save the record normally, causing an expansion to be created.
 
         $record->save();
 
@@ -228,7 +228,7 @@ class RecordExpansionTest extends NeatlinePlugin_TestCase
     /**
      * When a record is deleted, all of its expansions should be deleted.
      */
-    public function testDeleteExpansion()
+    public function testDeleteRecordExpansionsOnRecordDelete()
     {
 
         $record1 = new NeatlineRecord();
@@ -249,6 +249,65 @@ class RecordExpansionTest extends NeatlinePlugin_TestCase
         $this->assertEquals($c2, $c1-1);
 
         // Should not delete record 2 row.
+        $this->assertNotNull($expansion2);
+
+    }
+
+
+    /**
+     * When an exhibit is deleted, all of the expansions for child records
+     * should also be deleted.
+     */
+    public function testDeleteRecordExpansionsOnExhibitDelete()
+    {
+
+        $exhibit1 = $this->__exhibit();
+        $exhibit2 = $this->__exhibit();
+
+        $record1 = new NeatlineRecord($exhibit1);
+        $record2 = new NeatlineRecord($exhibit2);
+
+        $record1->save();
+        $record2->save();
+
+        $c1 = $this->__recordExpansions->count();
+        $exhibit1->delete();
+        $c2 = $this->__recordExpansions->count();
+
+        $expansion1 = $this->__recordExpansions->findByParent($record1);
+        $expansion2 = $this->__recordExpansions->findByParent($record2);
+
+        // Should delete record 1 row.
+        $this->assertNull($expansion1);
+        $this->assertEquals($c2, $c1-1);
+
+        // Should not delete record 2 row.
+        $this->assertNotNull($expansion2);
+
+    }
+
+
+    /**
+     * When an exhibit is deleted, all its expansions should be deleted.
+     */
+    public function testDeleteExhibitExpansionsOnExhibitDelete()
+    {
+
+        $exhibit1 = $this->__exhibit();
+        $exhibit2 = $this->__exhibit();
+
+        $c1 = $this->__exhibitExpansions->count();
+        $exhibit1->delete();
+        $c2 = $this->__exhibitExpansions->count();
+
+        $expansion1 = $this->__exhibitExpansions->findByParent($exhibit1);
+        $expansion2 = $this->__exhibitExpansions->findByParent($exhibit2);
+
+        // Should delete exhibit 1 row.
+        $this->assertNull($expansion1);
+        $this->assertEquals($c2, $c1-1);
+
+        // Should not delete exhibit 2 row.
         $this->assertNotNull($expansion2);
 
     }
