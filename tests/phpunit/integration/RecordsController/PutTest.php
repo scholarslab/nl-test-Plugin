@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class RecordsControllerTest_Put extends NeatlinePlugin_TestCase
+class RecordsControllerTest_Put extends NeatlinePlugin_Case_Default
 {
 
 
@@ -29,7 +29,7 @@ class RecordsControllerTest_Put extends NeatlinePlugin_TestCase
 
         $record->save();
 
-        $this->writePut(array(
+        $this->setPut(array(
             'field4' => '4',
             'field5' => '5',
             'field6' => '6'

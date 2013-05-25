@@ -10,7 +10,7 @@
  */
 
 
-class NeatlinePlugin_TestCase extends Neatline_AbstractCase
+class NeatlinePlugin_Case_Default extends Neatline_Case_Abstract
 {
 
 

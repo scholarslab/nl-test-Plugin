@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class ExhibitsControllerTest_Put extends NeatlinePlugin_TestCase
+class ExhibitsControllerTest_Put extends NeatlinePlugin_Case_Default
 {
 
 
@@ -29,7 +29,7 @@ class ExhibitsControllerTest_Put extends NeatlinePlugin_TestCase
 
         $exhibit->save();
 
-        $this->writePut(array(
+        $this->setPut(array(
             'field1' => '2',
             'field2' => '3',
             'field3' => '4'

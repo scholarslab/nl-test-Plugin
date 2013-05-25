@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecordExpansionTable extends Neatline_ExpansionTable
+class NeatlineRecordExpansionTable extends Neatline_Table_Expansion
 {
 
 }

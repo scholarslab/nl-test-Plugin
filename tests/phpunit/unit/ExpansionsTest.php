@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class RecordExpansionTest extends NeatlinePlugin_TestCase
+class RecordExpansionTest extends NeatlinePlugin_Case_Default
 {
 
 

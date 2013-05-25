@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class RecordsControllerTest_List extends NeatlinePlugin_TestCase
+class RecordsControllerTest_List extends NeatlinePlugin_Case_Default
 {
 
 
@@ -20,6 +20,7 @@ class RecordsControllerTest_List extends NeatlinePlugin_TestCase
     {
 
         parent::setUp();
+        $this->mockTheme();
 
         // Create exhibit.
         $this->exhibit = $this->__exhibit();

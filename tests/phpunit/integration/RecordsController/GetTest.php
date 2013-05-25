@@ -9,8 +9,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class RecordsControllerTest_Get extends NeatlinePlugin_TestCase
+class RecordsControllerTest_Get extends NeatlinePlugin_Case_Default
 {
+
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->mockTheme();
+    }
 
 
     /**
