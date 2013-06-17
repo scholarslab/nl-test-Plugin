@@ -226,6 +226,37 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
 
 
     /**
+     * Likewise, left-joined NULL default values should not override field
+     * defaults provided by the expansion row model.
+     */
+    public function testPreserveExpansionFieldDefaults()
+    {
+
+        $record = new NeatlineRecord();
+        $record->__save();
+
+        // Load a record without an expansion. The three expansion fields
+        // (`field4`, `field5`, `field6`) will all be joined onto the row
+        // as NULL values.
+
+        $record = $this->reload($record);
+
+        // Save the record normally, causing an expansion to be created.
+
+        $record->save();
+
+        // The fields defaults on the expansion row model should not be
+        // overwritten by the left-joined NULL values.
+
+        $record = $this->reload($record);
+        $this->assertEquals($record->field4, 4);
+        $this->assertEquals($record->field5, 5);
+        $this->assertEquals($record->field6, 6);
+
+    }
+
+
+    /**
      * When a record is deleted, all of its expansions should be deleted.
      */
     public function testDeleteRecordExpansionsOnRecordDelete()
