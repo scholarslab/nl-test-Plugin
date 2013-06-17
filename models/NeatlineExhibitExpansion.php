@@ -13,9 +13,9 @@ class NeatlineExhibitExpansion extends Neatline_Row_Expansion
 {
 
 
-    public $field1; // INT(10) UNSIGNED NULL
-    public $field2; // INT(10) UNSIGNED NULL
-    public $field3; // INT(10) UNSIGNED NULL
+    public $field1 = 1; // INT(10) UNSIGNED NULL
+    public $field2 = 2; // INT(10) UNSIGNED NULL
+    public $field3 = 3; // INT(10) UNSIGNED NULL
 
 
 }

@@ -13,9 +13,9 @@ class NeatlineRecordExpansion extends Neatline_Row_Expansion
 {
 
 
-    public $field4; // INT(10) UNSIGNED NULL
-    public $field5; // INT(10) UNSIGNED NULL
-    public $field6; // INT(10) UNSIGNED NULL
+    public $field4 = 4; // INT(10) UNSIGNED NULL
+    public $field5 = 5; // INT(10) UNSIGNED NULL
+    public $field6 = 6; // INT(10) UNSIGNED NULL
 
 
 }
