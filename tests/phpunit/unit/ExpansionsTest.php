@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class RecordExpansionTest extends NeatlinePlugin_Case_Default
+class ExpansionsTest extends NeatlinePlugin_Case_Default
 {
 
 
@@ -27,15 +27,15 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
         $record->field5 = 2;
         $record->field6 = 3;
 
-        $c1 = $this->__recordExpansions->count();
+        $c1 = $this->_recordExpansions->count();
         $record->save();
-        $c2 = $this->__recordExpansions->count();
+        $c2 = $this->_recordExpansions->count();
 
         // Should create row.
         $this->assertEquals($c2, $c1+1);
 
         // Should set expansion fields.
-        $expansion = $this->__recordExpansions->getOrCreate($record);
+        $expansion = $this->_recordExpansions->getOrCreate($record);
         $this->assertEquals($expansion->field4, 1);
         $this->assertEquals($expansion->field5, 2);
         $this->assertEquals($expansion->field6, 3);
@@ -62,15 +62,15 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
         $record->field5 = 5;
         $record->field6 = 6;
 
-        $c1 = $this->__recordExpansions->count();
+        $c1 = $this->_recordExpansions->count();
         $record->save();
-        $c2 = $this->__recordExpansions->count();
+        $c2 = $this->_recordExpansions->count();
 
         // Should not create row.
         $this->assertEquals($c2, $c1);
 
         // Should set expansion fields.
-        $expansion = $this->__recordExpansions->getOrCreate($record);
+        $expansion = $this->_recordExpansions->getOrCreate($record);
         $this->assertEquals($expansion->field4, 4);
         $this->assertEquals($expansion->field5, 5);
         $this->assertEquals($expansion->field6, 6);
@@ -88,7 +88,7 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
         $record = new NeatlineRecord();
         $record->__save();
 
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
         $fields = $record->toArray();
 
         // Should left-join expansion fields.
@@ -117,7 +117,7 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
 
         $record->save();
 
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
         $this->assertEquals($record->field4, 1);
         $this->assertEquals($record->field5, 2);
         $this->assertEquals($record->field6, 3);
@@ -146,7 +146,7 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
         // When the record is loaded, the id of the expansion should not
         // "joined over" the id of the parent record.
 
-        $recordB = $this->reload($recordA);
+        $recordB = $this->_reload($recordA);
         $this->assertEquals($recordB->id, $recordA->id);
         $this->assertNotEquals($recordB->id, 999);
 
@@ -176,7 +176,7 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
         // When the parent record is saved, the id of the parent record
         // should not get passed as a settable field to the expansion.
 
-        $expansionB = $this->reload($expansionA);
+        $expansionB = $this->_reload($expansionA);
         $this->assertEquals($expansionB->id, 999);
 
     }
@@ -201,7 +201,7 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
         // Load a record without an expansion. A NULL `parent_id` will be
         // left-joined onto the row.
 
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         $record->field4 = 1;
         $record->field5 = 2;
@@ -217,7 +217,7 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
         // parent would be broken, and the expansion columns would not be
         // present on the row.
 
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
         $this->assertEquals($record->field4, 1);
         $this->assertEquals($record->field5, 2);
         $this->assertEquals($record->field6, 3);
@@ -239,7 +239,7 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
         // (`field4`, `field5`, `field6`) will all be joined onto the row
         // as NULL values.
 
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // Save the record normally, causing an expansion to be created.
 
@@ -248,7 +248,7 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
         // The fields defaults on the expansion row model should not be
         // overwritten by the left-joined NULL values.
 
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
         $this->assertEquals($record->field4, 4);
         $this->assertEquals($record->field5, 5);
         $this->assertEquals($record->field6, 6);
@@ -268,12 +268,12 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
         $record1->save();
         $record2->save();
 
-        $c1 = $this->__recordExpansions->count();
+        $c1 = $this->_recordExpansions->count();
         $record1->delete();
-        $c2 = $this->__recordExpansions->count();
+        $c2 = $this->_recordExpansions->count();
 
-        $expansion1 = $this->__recordExpansions->findByParent($record1);
-        $expansion2 = $this->__recordExpansions->findByParent($record2);
+        $expansion1 = $this->_recordExpansions->findByParent($record1);
+        $expansion2 = $this->_recordExpansions->findByParent($record2);
 
         // Should delete record 1 row.
         $this->assertNull($expansion1);
@@ -292,8 +292,8 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
     public function testDeleteRecordExpansionsOnExhibitDelete()
     {
 
-        $exhibit1 = $this->__exhibit();
-        $exhibit2 = $this->__exhibit();
+        $exhibit1 = $this->_exhibit();
+        $exhibit2 = $this->_exhibit();
 
         $record1 = new NeatlineRecord($exhibit1);
         $record2 = new NeatlineRecord($exhibit2);
@@ -301,12 +301,12 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
         $record1->save();
         $record2->save();
 
-        $c1 = $this->__recordExpansions->count();
+        $c1 = $this->_recordExpansions->count();
         $exhibit1->delete();
-        $c2 = $this->__recordExpansions->count();
+        $c2 = $this->_recordExpansions->count();
 
-        $expansion1 = $this->__recordExpansions->findByParent($record1);
-        $expansion2 = $this->__recordExpansions->findByParent($record2);
+        $expansion1 = $this->_recordExpansions->findByParent($record1);
+        $expansion2 = $this->_recordExpansions->findByParent($record2);
 
         // Should delete record 1 row.
         $this->assertNull($expansion1);
@@ -324,15 +324,15 @@ class RecordExpansionTest extends NeatlinePlugin_Case_Default
     public function testDeleteExhibitExpansionsOnExhibitDelete()
     {
 
-        $exhibit1 = $this->__exhibit();
-        $exhibit2 = $this->__exhibit();
+        $exhibit1 = $this->_exhibit();
+        $exhibit2 = $this->_exhibit();
 
-        $c1 = $this->__exhibitExpansions->count();
+        $c1 = $this->_exhibitExpansions->count();
         $exhibit1->delete();
-        $c2 = $this->__exhibitExpansions->count();
+        $c2 = $this->_exhibitExpansions->count();
 
-        $expansion1 = $this->__exhibitExpansions->findByParent($exhibit1);
-        $expansion2 = $this->__exhibitExpansions->findByParent($exhibit2);
+        $expansion1 = $this->_exhibitExpansions->findByParent($exhibit1);
+        $expansion2 = $this->_exhibitExpansions->findByParent($exhibit2);
 
         // Should delete exhibit 1 row.
         $this->assertNull($expansion1);

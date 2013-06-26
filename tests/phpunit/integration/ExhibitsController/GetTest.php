@@ -19,7 +19,7 @@ class ExhibitsControllerTest_Get extends NeatlinePlugin_Case_Default
     public function testGet()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         $exhibit->setArray(array(
             'field1' => 1,
@@ -30,7 +30,7 @@ class ExhibitsControllerTest_Get extends NeatlinePlugin_Case_Default
         $exhibit->save();
 
         $this->dispatch('neatline/exhibits/'.$exhibit->id);
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
 
         $this->assertEquals($response->id, $exhibit->id);
         $this->assertEquals($response->field1, 1);

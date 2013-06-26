@@ -19,7 +19,7 @@ class ExhibitsControllerTest_Put extends NeatlinePlugin_Case_Default
     public function testUpdateExhibit()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         $exhibit->setArray(array(
             'field1' => 1,
@@ -29,14 +29,14 @@ class ExhibitsControllerTest_Put extends NeatlinePlugin_Case_Default
 
         $exhibit->save();
 
-        $this->setPut(array(
+        $this->_setPut(array(
             'field1' => '2',
             'field2' => '3',
             'field3' => '4'
         ));
 
         $this->dispatch('neatline/exhibits/'.$exhibit->id);
-        $exhibit = $this->reload($exhibit);
+        $exhibit = $this->_reload($exhibit);
 
         $this->assertEquals($exhibit->field1, 2);
         $this->assertEquals($exhibit->field2, 3);

@@ -16,7 +16,7 @@ class RecordsControllerTest_Get extends NeatlinePlugin_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->mockTheme();
+        $this->_mockTheme();
     }
 
 
@@ -26,8 +26,8 @@ class RecordsControllerTest_Get extends NeatlinePlugin_Case_Default
     public function testGet()
     {
 
-        $exhibit    = $this->__exhibit();
-        $item       = $this->__item();
+        $exhibit    = $this->_exhibit();
+        $item       = $this->_item();
         $record     = new NeatlineRecord($exhibit, $item);
 
         $record->setArray(array(
@@ -39,7 +39,7 @@ class RecordsControllerTest_Get extends NeatlinePlugin_Case_Default
         $record->save();
 
         $this->dispatch('neatline/records/'.$record->id);
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
 
         $this->assertEquals($response->id, $record->id);
         $this->assertEquals($response->field4, 1);

@@ -19,7 +19,7 @@ class RecordsControllerTest_Put extends NeatlinePlugin_Case_Default
     public function testUpdateRecord()
     {
 
-        $record = $this->__record();
+        $record = $this->_record();
 
         $record->setArray(array(
             'field4' => 1,
@@ -29,14 +29,14 @@ class RecordsControllerTest_Put extends NeatlinePlugin_Case_Default
 
         $record->save();
 
-        $this->setPut(array(
+        $this->_setPut(array(
             'field4' => '4',
             'field5' => '5',
             'field6' => '6'
         ));
 
         $this->dispatch('neatline/records/'.$record->id);
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         $this->assertEquals($record->field4, 4);
         $this->assertEquals($record->field5, 5);

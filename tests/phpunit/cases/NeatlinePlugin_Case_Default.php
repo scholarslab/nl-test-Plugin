@@ -32,13 +32,13 @@ class NeatlinePlugin_Case_Default extends Neatline_Case_Abstract
         $pluginHelper->setUp('NeatlinePlugin');
 
         // Alias expandables.
-        $this->__exhibits = $this->db->getTable('NeatlineExhibit');
-        $this->__records  = $this->db->getTable('NeatlineRecord');
+        $this->_exhibits = $this->db->getTable('NeatlineExhibit');
+        $this->_records  = $this->db->getTable('NeatlineRecord');
 
         // Alias expansions.
-        $this->__exhibitExpansions = $this->db->getTable(
+        $this->_exhibitExpansions = $this->db->getTable(
             'NeatlineExhibitExpansion');
-        $this->__recordExpansions = $this->db->getTable(
+        $this->_recordExpansions  = $this->db->getTable(
             'NeatlineRecordExpansion');
 
     }
@@ -49,7 +49,7 @@ class NeatlinePlugin_Case_Default extends Neatline_Case_Abstract
      *
      * @return string The directory.
      */
-    protected function getFixturesPath()
+    protected function _getFixturesPath()
     {
         return NL_PLUGINS_DIR . '/tests/jasmine/fixtures/';
     }

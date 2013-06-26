@@ -19,7 +19,7 @@ class RecordsControllerTest_Post extends NeatlinePlugin_Case_Default
     public function testCreateRecord()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         $this->request->setMethod('POST')->setRawBody(
             Zend_Json::encode(array(
@@ -31,7 +31,7 @@ class RecordsControllerTest_Post extends NeatlinePlugin_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $record = $this->__records->find($this->getResponseArray()->id);
+        $record = $this->_records->find($this->_getResponseArray()->id);
 
         // Should update fields.
         $this->assertEquals($record->field4, 1);
