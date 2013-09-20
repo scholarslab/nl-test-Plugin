@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -33,7 +33,7 @@ class NeatlinePluginPlugin extends Omeka_Plugin_AbstractPlugin
     {
 
         // Exhibit:
-        $sql = "CREATE TABLE IF NOT EXISTS
+        $this->_db->query("CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_exhibit_expansions` (
 
             `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -46,12 +46,10 @@ class NeatlinePluginPlugin extends Omeka_Plugin_AbstractPlugin
              UNIQUE KEY     (`parent_id`),
              INDEX          (`parent_id`)
 
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-
-        $this->_db->query($sql);
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
         // Record:
-        $sql = "CREATE TABLE IF NOT EXISTS
+        $this->_db->query("CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_record_expansions` (
 
             `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -64,9 +62,7 @@ class NeatlinePluginPlugin extends Omeka_Plugin_AbstractPlugin
              UNIQUE KEY     (`parent_id`),
              INDEX          (`parent_id`)
 
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-
-        $this->_db->query($sql);
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
     }
 
@@ -78,14 +74,12 @@ class NeatlinePluginPlugin extends Omeka_Plugin_AbstractPlugin
     {
 
         // Exhibit:
-        $sql = "DROP TABLE IF EXISTS
-            `{$this->_db->prefix}neatline_exhibit_expansions`";
-        $this->_db->query($sql);
+        $this->_db->query("DROP TABLE IF EXISTS
+            `{$this->_db->prefix}neatline_exhibit_expansions`");
 
         // Record:
-        $sql = "DROP TABLE IF EXISTS
-            `{$this->_db->prefix}neatline_record_expansions`";
-        $this->_db->query($sql);
+        $this->_db->query("DROP TABLE IF EXISTS
+            `{$this->_db->prefix}neatline_record_expansions`");
 
     }
 
@@ -98,9 +92,7 @@ class NeatlinePluginPlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function filterNeatlineExhibitExpansions($tables)
     {
-        $tables[] = $this->_db->getTable(
-            'NeatlineExhibitExpansion'
-        );
+        $tables[] = $this->_db->getTable('NeatlineExhibitExpansion');
         return $tables;
     }
 
@@ -113,9 +105,7 @@ class NeatlinePluginPlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function filterNeatlineRecordExpansions($tables)
     {
-        $tables[] = $this->_db->getTable(
-            'NeatlineRecordExpansion'
-        );
+        $tables[] = $this->_db->getTable('NeatlineRecordExpansion');
         return $tables;
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -14,9 +14,9 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
 
 
     /**
-     * When a record is saved for which an expansion row does not exist,
-     * a new expansion should be created, populated with field data, and
-     * associated with the record.
+     * When a record is saved for which an expansion row does not exist, a new
+     * expansion should be created, populated with field data, and associated
+     * with the record.
      */
     public function testCreateExpansion()
     {
@@ -32,20 +32,20 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
         $c2 = $this->_recordExpansions->count();
 
         // Should create row.
-        $this->assertEquals($c2, $c1+1);
+        $this->assertEquals($c1+1, $c2);
 
         // Should set expansion fields.
         $expansion = $this->_recordExpansions->getOrCreate($record);
-        $this->assertEquals($expansion->field4, 1);
-        $this->assertEquals($expansion->field5, 2);
-        $this->assertEquals($expansion->field6, 3);
+        $this->assertEquals(1, $expansion->field4);
+        $this->assertEquals(2, $expansion->field5);
+        $this->assertEquals(3, $expansion->field6);
 
     }
 
 
     /**
-     * When a record is saved for whcih an expansion row already exists,
-     * the existing expansion should be updated with new data.
+     * When a record is saved for whcih an expansion row already exists, the
+     * existing expansion should be updated with new data.
      */
     public function testUpdateExpansion()
     {
@@ -67,13 +67,13 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
         $c2 = $this->_recordExpansions->count();
 
         // Should not create row.
-        $this->assertEquals($c2, $c1);
+        $this->assertEquals($c1, $c2);
 
         // Should set expansion fields.
         $expansion = $this->_recordExpansions->getOrCreate($record);
-        $this->assertEquals($expansion->field4, 4);
-        $this->assertEquals($expansion->field5, 5);
-        $this->assertEquals($expansion->field6, 6);
+        $this->assertEquals(4, $expansion->field4);
+        $this->assertEquals(5, $expansion->field5);
+        $this->assertEquals(6, $expansion->field6);
 
     }
 
@@ -103,8 +103,8 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
 
 
     /**
-     * When record that has an expansion is loaded, the expansion should
-     * be left-joined onto the row.
+     * When record that has an expansion is loaded, the expansion should be
+     * left-joined onto the row.
      */
     public function testJoinExistingExpansion()
     {
@@ -118,17 +118,17 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
         $record->save();
 
         $record = $this->_reload($record);
-        $this->assertEquals($record->field4, 1);
-        $this->assertEquals($record->field5, 2);
-        $this->assertEquals($record->field6, 3);
+        $this->assertEquals(1, $record->field4);
+        $this->assertEquals(2, $record->field5);
+        $this->assertEquals(3, $record->field6);
 
     }
 
 
     /**
-     * When a parent is loaded, the `id` column on the expansion table
-     * should be omitted from the list of columns to be joined onto the
-     * record. Otherwise, the expansion id will clobber the record id.
+     * When a parent is loaded, the `id` column on the expansion table should
+     * be omitted from the list of columns to be joined onto the record.
+     * Otherwise, the expansion id will clobber the record id.
      */
     public function testPreserveParentIdOnQuery()
     {
@@ -136,8 +136,8 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
         $recordA = new NeatlineRecord();
         $recordA->__save();
 
-        // Manually create expansion for record. (Ensure that the id of 
-        // the expansion is different from the id of the record.)
+        // Manually create expansion for record. (Ensure that the id of the
+        // expansion is different from the id of the record.)
 
         $expansion = new NeatlineRecordExpansion($recordA);
         $expansion->id = 999;
@@ -147,8 +147,8 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
         // "joined over" the id of the parent record.
 
         $recordB = $this->_reload($recordA);
-        $this->assertEquals($recordB->id, $recordA->id);
-        $this->assertNotEquals($recordB->id, 999);
+        $this->assertEquals($recordA->id, $recordB->id);
+        $this->assertNotEquals(999, $recordB->id);
 
     }
 
@@ -164,8 +164,8 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
         $record = new NeatlineRecord();
         $record->__save();
 
-        // Manually create expansion for record. (Ensure that the id of 
-        // the expansion is different from the id of the record.)
+        // Manually create expansion for record. (Ensure that the id of the
+        // expansion is different from the id of the record.)
 
         $expansionA = new NeatlineRecordExpansion($record);
         $expansionA->id = 999;
@@ -173,24 +173,24 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
 
         $record->save();
 
-        // When the parent record is saved, the id of the parent record
-        // should not get passed as a settable field to the expansion.
+        // When the parent record is saved, the id of the parent record should
+        // not get passed as a settable field to the expansion.
 
         $expansionB = $this->_reload($expansionA);
-        $this->assertEquals($expansionB->id, 999);
+        $this->assertEquals(999, $expansionB->id);
 
     }
 
 
     /**
-     * When a record that does _not_ have an expansion is queried with
-     * NULL expansion columns and then the record is saved (for example,
-     * when an expansion table has just been installed, and an existing
-     * Neatline record is saved for the first time since the expansion
-     * was added), the `parent_id` column should be removed from the array
-     * of data set on the expansion. Otherwise, the NULL value that was
-     * left-joined onto the parent at query-time would clobber out the
-     * foreign key reference that is set when the expansion is created.
+     * When a record that does _not_ have an expansion is queried with NULL
+     * expansion columns and then the record is saved (for example, when an
+     * expansion table has just been installed, and an existing Neatline
+     * record is saved for the first time since the expansion was added), the
+     * `parent_id` column should be removed from the array of data set on the
+     * expansion. Otherwise, the NULL value that was left-joined onto the
+     * parent at query-time would clobber out the foreign key reference that
+     * is set when the expansion is created.
      */
     public function testPreserveExpansionParentId()
     {
@@ -211,16 +211,16 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
 
         $record->save();
 
-        // When the record is loaded again, the expansion row should be
-        // left-joined onto the parent. If the NULL `parent_id` value were
-        // passed to the expansion when it was saved, the reference to the
-        // parent would be broken, and the expansion columns would not be
-        // present on the row.
+        // When the record is loaded again, the expansion row should be left-
+        // joined onto the parent. If the NULL `parent_id` value were passed
+        // to the expansion when it was saved, the reference to the parent
+        // would be broken, and the expansion columns would not be present on
+        // the row.
 
         $record = $this->_reload($record);
-        $this->assertEquals($record->field4, 1);
-        $this->assertEquals($record->field5, 2);
-        $this->assertEquals($record->field6, 3);
+        $this->assertEquals(1, $record->field4);
+        $this->assertEquals(2, $record->field5);
+        $this->assertEquals(3, $record->field6);
 
     }
 
@@ -249,9 +249,9 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
         // overwritten by the left-joined NULL values.
 
         $record = $this->_reload($record);
-        $this->assertEquals($record->field4, 4);
-        $this->assertEquals($record->field5, 5);
-        $this->assertEquals($record->field6, 6);
+        $this->assertEquals(4, $record->field4);
+        $this->assertEquals(5, $record->field5);
+        $this->assertEquals(6, $record->field6);
 
     }
 
@@ -277,7 +277,7 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
 
         // Should delete record 1 row.
         $this->assertNull($expansion1);
-        $this->assertEquals($c2, $c1-1);
+        $this->assertEquals($c1-1, $c2);
 
         // Should not delete record 2 row.
         $this->assertNotNull($expansion2);
@@ -310,7 +310,7 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
 
         // Should delete record 1 row.
         $this->assertNull($expansion1);
-        $this->assertEquals($c2, $c1-1);
+        $this->assertEquals($c1-1, $c2);
 
         // Should not delete record 2 row.
         $this->assertNotNull($expansion2);
@@ -336,7 +336,7 @@ class ExpansionsTest extends NeatlinePlugin_Case_Default
 
         // Should delete exhibit 1 row.
         $this->assertNull($expansion1);
-        $this->assertEquals($c2, $c1-1);
+        $this->assertEquals($c1-1, $c2);
 
         // Should not delete exhibit 2 row.
         $this->assertNotNull($expansion2);

@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -37,9 +37,11 @@ class NeatlinePlugin_Case_Default extends Neatline_Case_Abstract
 
         // Alias expansions.
         $this->_exhibitExpansions = $this->db->getTable(
-            'NeatlineExhibitExpansion');
+            'NeatlineExhibitExpansion'
+        );
         $this->_recordExpansions  = $this->db->getTable(
-            'NeatlineRecordExpansion');
+            'NeatlineRecordExpansion'
+        );
 
     }
 

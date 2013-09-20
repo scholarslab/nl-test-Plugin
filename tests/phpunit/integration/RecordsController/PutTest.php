@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -38,9 +38,9 @@ class RecordsControllerTest_Put extends NeatlinePlugin_Case_Default
         $this->dispatch('neatline/records/'.$record->id);
         $record = $this->_reload($record);
 
-        $this->assertEquals($record->field4, 4);
-        $this->assertEquals($record->field5, 5);
-        $this->assertEquals($record->field6, 6);
+        $this->assertEquals(4, $record->field4);
+        $this->assertEquals(5, $record->field5);
+        $this->assertEquals(6, $record->field6);
 
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -38,9 +38,9 @@ class ExhibitsControllerTest_Put extends NeatlinePlugin_Case_Default
         $this->dispatch('neatline/exhibits/'.$exhibit->id);
         $exhibit = $this->_reload($exhibit);
 
-        $this->assertEquals($exhibit->field1, 2);
-        $this->assertEquals($exhibit->field2, 3);
-        $this->assertEquals($exhibit->field3, 4);
+        $this->assertEquals(2, $exhibit->field1);
+        $this->assertEquals(3, $exhibit->field2);
+        $this->assertEquals(4, $exhibit->field3);
 
     }
 
