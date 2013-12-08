@@ -10,7 +10,7 @@
  */
 
 
-class NeatlinePlugin_Case_Default extends Neatline_Case_Abstract
+class NeatlinePlugin_Case_Default extends Neatline_Case_Default
 {
 
 
@@ -22,18 +22,8 @@ class NeatlinePlugin_Case_Default extends Neatline_Case_Abstract
 
         parent::setUp();
 
-        // Authenticate and set the current user.
-        $this->user = $this->db->getTable('User')->find(1);
-        $this->_authenticateUser($this->user);
-
-        // Install Neatline and NeatlinePlugin.
-        $pluginHelper = new Omeka_Test_Helper_Plugin;
-        $pluginHelper->setUp('Neatline');
-        $pluginHelper->setUp('NeatlinePlugin');
-
-        // Alias expandables.
-        $this->_exhibits = $this->db->getTable('NeatlineExhibit');
-        $this->_records  = $this->db->getTable('NeatlineRecord');
+        // Install NeatlinePlugin.
+        $this->helper->setUp('NeatlinePlugin');
 
         // Alias expansions.
         $this->_exhibitExpansions = $this->db->getTable(
@@ -43,17 +33,6 @@ class NeatlinePlugin_Case_Default extends Neatline_Case_Abstract
             'NeatlineRecordExpansion'
         );
 
-    }
-
-
-    /**
-     * Get the Jasmine fixtures directory.
-     *
-     * @return string The directory.
-     */
-    protected function _getFixturesPath()
-    {
-        return NL_PLUGINS_DIR . '/tests/jasmine/fixtures/';
     }
 
 

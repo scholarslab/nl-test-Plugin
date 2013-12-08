@@ -39,12 +39,12 @@ class RecordsControllerTest_Get extends NeatlinePlugin_Case_Default
         $record->save();
 
         $this->dispatch('neatline/records/'.$record->id);
-        $response = $this->_getResponseArray();
+        $json = $this->_getResponseArray();
 
-        $this->assertEquals($record->id, $response->id);
-        $this->assertEquals(1, $response->field4, 1);
-        $this->assertEquals(2, $response->field5, 2);
-        $this->assertEquals(3, $response->field6, 3);
+        $this->assertEquals($record->id, $json['id']);
+        $this->assertEquals(1, $json['field4']);
+        $this->assertEquals(2, $json['field5']);
+        $this->assertEquals(3, $json['field6']);
 
     }
 

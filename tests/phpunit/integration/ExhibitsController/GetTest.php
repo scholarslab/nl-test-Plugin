@@ -30,12 +30,12 @@ class ExhibitsControllerTest_Get extends NeatlinePlugin_Case_Default
         $exhibit->save();
 
         $this->dispatch('neatline/exhibits/'.$exhibit->id);
-        $response = $this->_getResponseArray();
+        $json = $this->_getResponseArray();
 
-        $this->assertEquals($exhibit->id, $response->id);
-        $this->assertEquals(1, $response->field1);
-        $this->assertEquals(2, $response->field2);
-        $this->assertEquals(3, $response->field3);
+        $this->assertEquals($exhibit->id, $json['id']);
+        $this->assertEquals(1, $json['field1']);
+        $this->assertEquals(2, $json['field2']);
+        $this->assertEquals(3, $json['field3']);
 
     }
 

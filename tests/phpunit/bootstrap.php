@@ -9,7 +9,6 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-
 // Define path variables.
 define('NL_PLUGIN_DIR', dirname(dirname(dirname(__FILE__))));
 define('OMEKA_DIR', dirname(dirname(NL_PLUGIN_DIR)));
@@ -22,5 +21,5 @@ require_once NL_PLUGIN_DIR . '/NeatlinePluginPlugin.php';
 require_once NL_DIR . '/NeatlinePlugin.php';
 
 // Load abstract test cases.
-require_once NL_TEST_DIR . '/cases/Neatline_Case_Abstract.php';
+require_once NL_TEST_DIR . '/cases/Neatline_Case_Default.php';
 require_once 'cases/NeatlinePlugin_Case_Default.php';

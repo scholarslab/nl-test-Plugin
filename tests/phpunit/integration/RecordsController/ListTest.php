@@ -62,19 +62,19 @@ class RecordsControllerTest_List extends NeatlinePlugin_Case_Default
         $record2->save();
 
         $this->dispatch('neatline/records');
-        $records = $this->_getResponseArray()->records;
+        $records = $this->_getResponseArray()['records'];
 
         // Record 2:
-        $this->assertEquals($record2->id,   $records[0]->id);
-        $this->assertEquals(4,              $records[0]->field4);
-        $this->assertEquals(5,              $records[0]->field5);
-        $this->assertEquals(6,              $records[0]->field6);
+        $this->assertEquals($record2->id,   $records[0]['id']);
+        $this->assertEquals(4,              $records[0]['field4']);
+        $this->assertEquals(5,              $records[0]['field5']);
+        $this->assertEquals(6,              $records[0]['field6']);
 
         // Record 1:
-        $this->assertEquals($record1->id,   $records[1]->id);
-        $this->assertEquals(1,              $records[1]->field4);
-        $this->assertEquals(2,              $records[1]->field5);
-        $this->assertEquals(3,              $records[1]->field6);
+        $this->assertEquals($record1->id,   $records[1]['id']);
+        $this->assertEquals(1,              $records[1]['field4']);
+        $this->assertEquals(2,              $records[1]['field5']);
+        $this->assertEquals(3,              $records[1]['field6']);
 
     }
 
