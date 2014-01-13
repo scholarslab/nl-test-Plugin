@@ -1,9 +1,12 @@
 <phpunit bootstrap="bootstrap.php"
          convertErrorsToExceptions="true"
          convertWarningsToExceptions="true"
+         colors="true"
          verbose="true">
+
     <testsuite name="Neatline Plugin Tests">
         <directory>integration</directory>
         <directory>unit</directory>
     </testsuite>
+
 </phpunit>
